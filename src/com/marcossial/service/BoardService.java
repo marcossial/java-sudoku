@@ -50,6 +50,6 @@ public class BoardService {
             }
         }
 
-        return board.getCells();
+        return cells;
     }
 }
