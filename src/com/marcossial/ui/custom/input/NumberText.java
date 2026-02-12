@@ -1,13 +1,15 @@
 package com.marcossial.ui.custom.input;
 
 import com.marcossial.model.Cell;
+import com.marcossial.service.Event;
+import com.marcossial.service.EventListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-public class NumberText extends JTextField {
+public class NumberText extends JTextField implements EventListener {
     private final Cell cell;
     public NumberText(Cell cell) {
         this.cell = cell;
@@ -46,5 +48,12 @@ public class NumberText extends JTextField {
                 changeCell();
             }
         });
+    }
+
+    @Override
+    public void update(Event eventType) {
+        if (eventType.equals(Event.CLEAR_SPACE) && (this.isEnabled())) {
+            this.setText("");
+        }
     }
 }
