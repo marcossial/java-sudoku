@@ -34,10 +34,12 @@ public class MainScreen {
     public void buildMainScreen() {
         JPanel mainPanel = new MainPanel(dimension);
         JFrame mainFrame = new MainFrame(dimension, mainPanel);
-        for (int r = 0; r < 9; r += 3) {
-            int endRow = r + 2;
-            for (int c = 0; c < 9; c += 3) {
+
+        for (int r = 0; r < 9; r += 3) { // Grupos de Linhas
+            for (int c = 0; c < 9; c += 3) { // Grupos de Colunas
+                int endRow = r + 2;
                 int endCol = c + 2;
+
                 List<Cell> cells = getCellsFromSector(boardService.getCells(), c, endCol, r, endRow);
                 JPanel sector = generateSection(cells);
                 mainPanel.add(sector);
@@ -46,6 +48,7 @@ public class MainScreen {
         addResetButton(mainPanel);
         addFinishGameButton(mainPanel);
         addCheckGameStatusButton(mainPanel);
+
         mainFrame.revalidate();
         mainFrame.repaint();
         mainFrame.setVisible(true);
@@ -59,7 +62,8 @@ public class MainScreen {
         List<Cell> cellSector = new ArrayList<>();
         for (int r = initRow; r <= endRow; r++) {
             for (int c = initCol; c <= endCol; c++) {
-                cellSector.add(cells.get(c).get(r));
+                // POSSIVEL ERRO
+                cellSector.add(cells.get(r).get(c));
             }
         }
         return cellSector;
